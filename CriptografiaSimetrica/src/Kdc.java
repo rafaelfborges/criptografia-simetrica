@@ -33,54 +33,54 @@ public class Kdc
 	
 	private String gerarChave() {
 		String alfabeto = "abcdefghijklmnopqrstuvwxyz";
-    	int tamanhoChave = 16;
-    	StringBuilder sb = new StringBuilder(tamanhoChave);
-    	SecureRandom random = new SecureRandom();
+    		int tamanhoChave = 16;
+    		StringBuilder sb = new StringBuilder(tamanhoChave);
+    		SecureRandom random = new SecureRandom();
     	
-    	for (int i = 0; i < tamanhoChave; i++) {
-    		int randCharAt = random.nextInt(alfabeto.length());
-    		char randChar = alfabeto.charAt(randCharAt);
-    		sb.append(randChar);
+    		for (int i = 0; i < tamanhoChave; i++) {
+    			int randCharAt = random.nextInt(alfabeto.length());
+    			char randChar = alfabeto.charAt(randCharAt);
+    			sb.append(randChar);
     		}
-    	return sb.toString();
-    }
+    		return sb.toString();
+    	}
 	
 	public ArrayList<byte[]> solicitarChaveSessao(String nome, byte[] remetente, byte[] destinatario) {
 		Usuario usuario = buscarUsuario(nome);
 
-		//Se o usuário existir, decifro o remetente e destinatário.
+		//Se o usuÃ¡rio existir, decifro o remetente e destinatÃ¡rio.
 		if(usuario != null) {
 			String usuarioRemetente = Criptografia.decifra(remetente, usuario.getChaveMestre());
 			String usuarioDestino = Criptografia.decifra(destinatario, usuario.getChaveMestre());
 			
-			//Se o usuário remetente for quem ele diz ser, então busco pelo destinatário. 
+			//Se o usuÃ¡rio remetente for quem ele diz ser, entÃ£o busco pelo destinatÃ¡rio. 
 			if(usuarioRemetente.equals(usuario.getNome())) {
 				usuario = buscarUsuario(usuarioDestino);
 				
-				//Se o destinatário existe, então retorno a chave de sessão para a solicitação.
+				//Se o destinatÃ¡rio existe, entÃ£o retorno a chave de sessÃ£o para a solicitaÃ§Ã£o.
 				if(usuario != null) {
 					String chaveSessao = gerarChave(); //ChaveSessao gerada aleatoriamente.
 					
-					//Gera a chave de sessão do remetente, exemplo: kSessao na kBob.
+					//Gera a chave de sessÃ£o do remetente, exemplo: kSessao na kBob.
 					usuario = buscarUsuario(usuarioRemetente);
 					byte[] chaveSessaoRemetente = Criptografia.cifra(chaveSessao, usuario.getChaveMestre());
 					
-					//Gera a chave de sessão do destinatario, exemplo: kSessao na kAlice.
+					//Gera a chave de sessÃ£o do destinatario, exemplo: kSessao na kAlice.
 					usuario = buscarUsuario(usuarioDestino);
 					byte[] chaveSessaoDestinatario = Criptografia.cifra(chaveSessao, usuario.getChaveMestre());
 					
-					//Retorna a requisição para o usuário.
+					//Retorna a requisiÃ§Ã£o para o usuÃ¡rio.
 					ArrayList<byte[]> requisicao = new ArrayList<byte[]>();
 					requisicao.add(chaveSessaoRemetente);
 					requisicao.add(chaveSessaoDestinatario);
 					
 					return requisicao;
 				} else {
-					System.out.println("Destinatário inexistente!");
+					System.out.println("DestinatÃ¡rio inexistente!");
 				}
 			}
 		} else {
-			System.out.println("Remetente inválido!");
+			System.out.println("Remetente invÃ¡lido!");
 		}
 		return null;
 	}
