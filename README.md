@@ -8,4 +8,4 @@ Trabalho da matéria de Segurança da Informação sobre Criptografia Simétrica
 - Bob irá decifrar sua chave de sessão com chave mestre, armazenar e encaminhar a chave de sessão para Alice.
 - Alice irá decifrar sua chave de sessão com chave mestre, armazenar e responder um 'nonce' para Bob.
 - Bob irá decifrar o 'nonce' com chave de sessão, comparar executando a função combinada com Alice e encaminhar um novo 'nonce' cifrado.
-- Alice irá decifrar o 'nonce' com chave de sessão, comparar executando a função combinada e finalmente validar a autenticação.
+- Alice irá decifrar o 'nonce' com chave de sessão, comparar executando a função combinada que irá validar a autenticação.
