@@ -34,15 +34,14 @@ public class Kdc
 	private String gerarChave() {
 		String alfabeto = "abcdefghijklmnopqrstuvwxyz";
     	int tamanhoChave = 16;
-    	
     	StringBuilder sb = new StringBuilder(tamanhoChave);
     	SecureRandom random = new SecureRandom();
-
+    	
     	for (int i = 0; i < tamanhoChave; i++) {
     		int randCharAt = random.nextInt(alfabeto.length());
     		char randChar = alfabeto.charAt(randCharAt);
     		sb.append(randChar);
-    	}
+    		}
     	return sb.toString();
     }
 	
