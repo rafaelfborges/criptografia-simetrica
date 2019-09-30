@@ -1,4 +1,4 @@
-# criptografia-simetrica
+# Criptografia Simétrica
 Trabalho da matéria de Segurança da Informação sobre Criptografia Simétrica e Centro de Distribuição de Chaves (KDC). O objetivo era desenvolver um programa que implemente o centro de distribuição de chaves (KDC). O programa é composto de duas entidades (Alice e Bob) que desejam conversar utilizando criptografia simétrica.
 - Bob e o KDC devem compartilhar uma chave mestre.
 - Alice e o KDC devem compartilhar uma chave mestre.
